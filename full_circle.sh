@@ -1,4 +1,26 @@
 #!/bin/bash
+DOC_URL="https://bynder.atlassian.net/wiki/spaces/BAR/pages/926941209/How+to+run+a+K8s+service+in+development"
+
+echo -e "Have you installed and started MINIKUBE?  \033[1m[y, n]\033[0m"
+read input </dev/tty
+if [ "$input" = "n" ]; then
+		echo "Please reffer to the documentation: ${DOC_URL}"
+    open $DOC_URL
+		exit 0
+fi
+
+echo -e "Have you activated your python VENV?  \033[1m[y, n]\033[0m"
+read input </dev/tty
+if [ "$input" = "n" ]; then
+		echo "Then please do!"
+    exit 0
+fi
+
+echo -e "Have you logged into OKTA?  \033[1m[y, n]\033[0m"
+read input </dev/tty
+if [ "$input" = "n" ]; then
+		echo `awscli sts get-caller-identity`
+fi
 
 echo 'Setting up full circle.'
 ROOT_DIR=`pwd`
