@@ -1,6 +1,12 @@
 #!/bin/bash
 DOC_URL="https://bynder.atlassian.net/wiki/spaces/BAR/pages/926941209/How+to+run+a+K8s+service+in+development"
 
+if [ "$UPDATE_ONLY" = true]; then
+	echo "up is true"
+fi
+
+exit 0
+
 echo -e "Have you installed and started MINIKUBE?  \033[1m[y, n]\033[0m"
 read input </dev/tty
 if [ "$input" = "n" ]; then
@@ -33,8 +39,8 @@ status () {
 
 stash_checkout_pull_master () {
 	local MSG="Changes stashed by full circle setup"
-	STASH_CHECKOUT_PULL=`git -C ${1} stash save "${MSG}" && git -C ${1} checkout master && git -C ${1} pull upstream master`
-	echo "${STASH} @${1}"
+	STASH_CHECKOUT_PULL=`git -C ${1} stash save "${MSG}" && git -C ${1} checkout ${BRANCH} && git -C ${1} pull ${REMOTE} ${BRANCH}`
+	echo "stash-checkout-pull-master @${1} from ${REMOTE}"
 }
 
 echo `awscli sts get-caller-identity`

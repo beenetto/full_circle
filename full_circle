@@ -1,0 +1,7 @@
+
+#!/bin/bash
+
+SELFDIR="$(dirname "$0")"
+
+source "${SELFDIR}"/options.sh
+source "${SELFDIR}"/full_circle.sh
