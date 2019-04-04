@@ -1,9 +1,5 @@
-#!/bin/bash
-
 BRANCH="master"
 REMOTE="upstream"
-UPDATE_ONLY=false
-LOGIN_ONLY=false
 
 while [ -n "$1" ]; do
         # Copy so we can modify it (can't modify $1)
@@ -24,27 +20,15 @@ while [ -n "$1" ]; do
                                 BRANCH="${OPT#*=}"
                                 shift
                                 ;;
-                        # and --flag value opts like this
-                        -rd* | --branch )
-                                BRANCH="$2"
-                                shift
-                                ;;
                         -r=* | --remote=* )
                                 REMOTE="${OPT#*=}"
                                 shift
                                 ;;
-                        -r* | --remote )
-                                REMOTE="$2"
-                                shift
+                        -pi* | --pull-images )
+                                PULL_IMAGES=true
                                 ;;
-                        -uo* | --update-only )
-                                UPDATE_ONLY=true
-                                ;;
-                        -lo* | --login-only )
-                                LOGIN_ONLY=true
-                                ;;
-                        -rc* | --refresh-credintials-only )
-                                REFRESH_CREDINTIALS=true
+                        -ur* | --update-repos )
+                                UPDATE_REPOS=true
                                 ;;
                         # Anything unknown is recorded for later
                         * )
